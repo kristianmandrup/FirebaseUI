@@ -14,7 +14,7 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(createProvider)
+- (FirebaseFacebookAuthProvider) createProvider
 {
   return [[FirebaseFacebookAuthProvider alloc] initWithRef:self.firebaseRef authDelegate:self];
 }

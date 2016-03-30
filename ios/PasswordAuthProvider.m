@@ -12,7 +12,7 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(createProvider)
+- (FirebasePasswordAuthProvider) createProvider
 {
   return [[FirebasePasswordAuthProvider alloc] initWithRef:self.firebaseRef authDelegate:self];
 }

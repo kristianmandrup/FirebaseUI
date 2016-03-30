@@ -13,15 +13,20 @@
 @implementation RNTableViewDataSource
 RCT_EXPORT_MODULE();
 
+// do we need this to export if we only call super or are subclass methods auto available?
 RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier)
 {
   [super init];
 }
 
+- (FirebaseTableViewDataSource) createDataSource
+{
+  return [[FirebaseTableViewDataSource alloc]
+          initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.tableView];
+}
+
 RCT_EXPORT_METHOD(setup)
 {
-  self.dataSource = [[RNTableViewDataSource alloc]
-                     initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.tableView];
 
   [self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
     // Populate cell as you see fit, like as below

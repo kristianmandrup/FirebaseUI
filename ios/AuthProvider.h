@@ -13,5 +13,5 @@
 @interface AuthProvider : NSObject <RCTBridgeModule>
 @property (strong, nonatomic) NSString *firebaseUrl;
 @property (strong, nonatomic) Firebase *firebaseRef;
-- (NSObject)createProvider;
+// - (NSObject)createProvider;
 @end

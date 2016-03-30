@@ -13,7 +13,7 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(createProvider)
+- (FirebaseTwitterAuthProvider) createProvider
 {
   return [[FirebaseTwitterAuthProvider alloc] initWithRef:self.firebaseRef authDelegate:self twitterDelegate:self];
 }

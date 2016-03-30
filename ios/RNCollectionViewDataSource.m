@@ -18,10 +18,13 @@ RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIden
   [super init];
 }
 
+- (FirebaseCollectionViewDataSource) createDataSource
+{
+  return [[FirebaseCollectionViewDataSource alloc] initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.collectionView];
+}
+
 RCT_EXPORT_METHOD(setup)
 {
-  self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.collectionView];
-
   [self.dataSource populateCellWithBlock:^(UICollectionViewCell *cell, FDataSnapshot *snap) {
     // Populate cell as you see fit, like as below
     cell.backgroundColor = [UIColor blueColor];

@@ -92,10 +92,11 @@ We define some properties in the interface file.
 #import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
 #import "FirebaseTableViewDataSource.h"
+#import "RCTBridgeModule.h"
 
-@interface TableViewDataSource : NSObject
-  @property (strong, nonatomic) String *firebaseUrl;
-  @property (strong, nonatomic) String *reuseIdentifier;
+@interface TableViewDataSource : NSObject <RCTBridgeModule>
+  @property (strong, nonatomic) NSString *firebaseUrl;
+  @property (strong, nonatomic) NSString *reuseIdentifier;
   @property (strong, nonatomic) Firebase *firebaseRef;
   @property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
 @end
@@ -115,7 +116,7 @@ We define some properties in the interface file.
     self.firebaseUrl = [NSString stringWithFormat:@"https://%@.firebaseio.com/", appName];    
     self.firebaseRef = [[Firebase alloc] initWithUrl:self.firebaseUrl;    
     self.reuseIdentifier = reuseIdentifier;
-    self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.tableView];
+    self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.tableView];
 
     [self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
       // Populate cell as you see fit, like as below
@@ -133,4 +134,100 @@ We do the same for:
 - FacebookAuthProvider
 - ...
 
-Just do it!
+We now see that we can extract common functionality into abstract base classes!
+
+### DataSource
+
+We create a common class `DataSource` for all Views using a Firebase DataSource.
+
+```objective-c
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "FirebaseTableViewDataSource.h"
+#import "RCTBridgeModule.h"
+
+@interface RNDataSource : NSObject <RCTBridgeModule>
+@property (strong, nonatomic, __NON_NULL) NSString *firebaseUrl;
+@property (strong, nonatomic, __NON_NULL) NSString *reuseIdentifier;
+@property (strong, nonatomic, __NON_NULL) Firebase *firebaseRef;
+@end
+```
+
+```objective-c
+#import "RNDataSource.h"
+#import <Firebase/Firebase.h>
+
+@implementation RNDataSource
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier)
+{
+  self.firebaseUrl = [NSString stringWithFormat:@"https://%@.firebaseio.com/", appName];
+  self.firebaseRef = [[Firebase alloc] initWithUrl:self.firebaseUrl];
+  self.reuseIdentifier = reuseIdentifier;
+}
+@end
+```
+
+A samle subclass, `RNTableViewDataSource` 
+
+```objective-c
+#import "RNTableViewDataSource.h"
+#import <Firebase/Firebase.h>
+#import "AppDelegate.h"
+
+@implementation RNTableViewDataSource
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier)
+{
+  [super init];
+}
+
+RCT_EXPORT_METHOD(setup)
+{
+  self.dataSource = [[RNTableViewDataSource alloc]
+                     initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.tableView];
+
+  [self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
+    // Populate cell as you see fit, like as below
+    cell.textLabel.text = snap.key;
+  }];
+
+  [self.tableView setDataSource:self.dataSource];
+}
+@end
+```
+
+### AuthProvider
+
+```objective-c
+#import <Foundation/Foundation.h>
+#import <Firebase/Firebase.h>
+#import "RCTBridgeModule.h"
+
+@interface AuthProvider : NSObject <RCTBridgeModule>
+@property (strong, nonatomic) NSString *firebaseUrl;
+@property (strong, nonatomic) Firebase *firebaseRef;
+- (NSObject)createProvider;
+@end
+```
+
+The base implementation creates a connection and creates a provider, by calling `createProvider` to be provided by the subclass
+`xyzAuthProvider`.
+
+```objective-c
+#import "AuthProvider.h"
+#import <Firebase/Firebase.h>
+
+@implementation AuthProvider
+
+RCT_EXPORT_METHOD(init:(NSString *)appName)
+{
+  self.firebaseUrl = [NSString stringWithFormat:@"https://%@.firebaseio.com/", appName];
+  self.firebaseRef = [[Firebase alloc] initWithUrl:self.firebaseUrl];
+  self.provider = [self.createProvider];
+}
+@end
+
+```

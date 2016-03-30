@@ -13,7 +13,7 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(createProvider)
+- (FirebaseGoogleAuthProvider) createProvider
 {
   return [[FirebaseGoogleAuthProvider alloc] initWithRef:self.firebaseRef authDelegate:self uiDelegate:self];
 }
