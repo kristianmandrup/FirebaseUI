@@ -7,13 +7,14 @@
 //
 
 #import "GoogleAuthProvider.h"
+#import "FirebaseGoogleAuthProvider.h"
 
 @implementation GoogleAuthProvider
 
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
-FirebaseGoogleAuthProvider *googleProvider = [[FirebaseGoogleAuthProvider alloc] initWithRef:firebaseRef authDelegate:self uiDelegate:self];
-[googleProvider login];
-// ...
-[googleProvider logout];
+RCT_EXPORT_MODULE();
 
+RCT_EXPORT_METHOD(createProvider)
+{
+  return [[FirebaseGoogleAuthProvider alloc] initWithRef:self.firebaseRef authDelegate:self uiDelegate:self];
+}
 @end

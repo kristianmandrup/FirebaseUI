@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "RNDataSource.h"
+#import "FirebaseCollectionViewDataSource.h"
 #import "RCTBridgeModule.h"
 
-@interface RNCollectionViewDataSource : NSObject <RCTBridgeModule>
-@property (strong, nonatomic) String *firebaseUrl;
-@property (strong, nonatomic) String *reuseIdentifier;
-@property (strong, nonatomic) Firebase *firebaseRef;
-@property (strong, nonatomic) FirebaseCollectionViewDataSource *dataSource;
+@interface RNCollectionViewDataSource : RNDataSource
+@property (strong, nonatomic, __NON_NULL) FirebaseCollectionViewDataSource *dataSource;
+@property (strong, nonatomic, __NON_NULL) UICollectionView *collectionView;
 @end

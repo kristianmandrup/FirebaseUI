@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Firebase/Firebase.h>
+#import "RCTBridgeModule.h"
 
-@interface AuthProvider : NSObject
-
+@interface AuthProvider : NSObject <RCTBridgeModule>
+@property (strong, nonatomic) NSString *firebaseUrl;
+@property (strong, nonatomic) Firebase *firebaseRef;
+- (NSObject)createProvider;
 @end

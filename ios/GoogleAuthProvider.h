@@ -6,8 +6,10 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AuthProvider.h"
+#import "FirebaseGoogleAuthProvider.h"
 
-@interface GoogleAuthProvider : NSObject
-
+@interface GoogleAuthProvider : AuthProvider
+@property (strong, nonatomic) FirebaseGoogleAuthProvider *provider;
 @end
+

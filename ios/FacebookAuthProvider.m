@@ -12,13 +12,10 @@
 
 // See https://www.firebase.com/docs/ios/guide/login/facebook.html
 
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
-FirebaseFacebookAuthProvider *provider = [[FirebaseFacebookAuthProvider alloc] initWithRef:firebaseRef authDelegate:self];
+RCT_EXPORT_MODULE();
 
-// login
-[provider login];
-
-// logout
-[provider logout];
-
+RCT_EXPORT_METHOD(createProvider)
+{
+  return [[FirebaseFacebookAuthProvider alloc] initWithRef:self.firebaseRef authDelegate:self];
+}
 @end

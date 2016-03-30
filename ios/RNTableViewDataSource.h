@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Firebase/Firebase.h>
+#import <UIKit/UIKit.h>
+#import "RNDataSource.h"
 #import "FirebaseTableViewDataSource.h"
 #import "RCTBridgeModule.h"
 
-@interface RNTableViewDataSource : NSObject <RCTBridgeModule>
-  @property (strong, nonatomic) String *firebaseUrl;
-  @property (strong, nonatomic) String *reuseIdentifier;
-  @property (strong, nonatomic) Firebase *firebaseRef;
-  @property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
+@interface RNTableViewDataSource : RNDataSource
+  @property (strong, nonatomic, __NON_NULL) FirebaseTableViewDataSource *dataSource;
+  @property (strong, nonatomic, __NON_NULL) UITableView *tableView;
 @end
 
