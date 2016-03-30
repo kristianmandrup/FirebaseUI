@@ -16,6 +16,11 @@ An experiment, trying to wrap [Firebase UI](https://github.com/firebase/Firebase
 - There is also [React Native Cordova plugins](http://blog.nparashuram.com/2015/10/using-cordova-plugins-in-react-native.html) as inspiration...
 - Also see: [Bridging in React Native](http://tadeuzagallo.com/blog/react-native-bridge/)
 
+Check [Beginners Guide: Firebase React Native ](https://www.firebase.com/blog/2016-01-20-tutorial-firebase-react-native.html)
+
+- [ListView with section headers](http://moduscreate.com/react-native-listview-with-section-headers/)
+- [TableView](https://github.com/aksonov/react-native-tableview) - Can we hook this up with `FirebaseTableViewDataSource` :)
+
 ### Adding pods
 
 We add a `Podfile` using `pod init` in `/ios` folder.
@@ -310,30 +315,47 @@ import {
 
 // somewhere..
 
-var collectionDS = new FireCollectionViewDataSource(firebaseRef, id);
-var tableDS = new FireTableViewDataSource(firebaseRef, id);
+const firebaseRef = new FirebaseRef(fireUrl);
 
-class TableViewDemoApp extends React.Component {
-   /// ...
-  
-  render() {
-    return (
-      <FireTableView ref={fireRef} 
-        ...
-      />
-    )
+// Try playground: https://rnplay.org/apps/05ivvQ
+
+class CollectionViewDemo extends React.Component {
+
+  // ... appropriate lifecycle method? 
+  // See ListView
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: tableDS = new FireCollectionViewDataSource(firebaseRef, id);
+    };
   }
-}
-
-class CollectionViewDemoApp extends React.Component {
-   /// ...
-   
+        
   render() {
     return (
-      <FireCollectionView ref={fireRef} 
+      <FireCollectionView dataSource={this.state.dataSource}
         ...
       />
     )
   }
 }
 ```
+
+```js
+class TableViewDemo extends React.Component {
+   /// ...
+// 
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: tableDS = new FireTableViewDataSource(firebaseRef, id);
+    };
+  }
+  
+  render() {
+    return (
+      <FireTableView dataSource={this.state.dataSource} 
+        ...
+      />
+    )
+  }
+}
