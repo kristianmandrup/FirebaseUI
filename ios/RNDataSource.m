@@ -18,5 +18,6 @@ RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIden
   self.firebaseRef = [[Firebase alloc] initWithUrl:self.firebaseUrl];
   self.reuseIdentifier = reuseIdentifier;
   self.dataSource = [self.createDataSource];
+  return self;
 }
 @end

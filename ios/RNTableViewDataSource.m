@@ -16,7 +16,7 @@ RCT_EXPORT_MODULE();
 // do we need this to export if we only call super or are subclass methods auto available?
 RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier)
 {
-  [super init];
+  return [super init];
 }
 
 - (FirebaseTableViewDataSource) createDataSource

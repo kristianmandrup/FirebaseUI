@@ -16,7 +16,7 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier)
 {
-  [super init];
+  return [super init];
 }
 
 - (FirebaseCollectionViewDataSource*) createDataSource
