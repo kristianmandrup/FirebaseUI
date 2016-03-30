@@ -231,3 +231,109 @@ RCT_EXPORT_METHOD(init:(NSString *)appName)
 @end
 
 ```
+
+## Specifications
+
+- Authentication `firebase-ui-auth`
+- Data bound Views `firebase-ui-views`
+
+We recommend using a suitable IDE/Editor for React Native development, such as:
+
+- Visual Studio code (with React Native plugin)
+- Nuclide IDE (Atom) - by Facebook
+- ... ???
+
+You are encouraged to use Swift instead of Objective C, unless you have no prior experience with Swift.
+Use this project as a baseline or inspiration. Should provide a skeleton of the general idea.
+Look at other React Native custom components in the wild to see how such a project is best configured.
+
+### Authentication
+
+We need to wrap the Firebase Auth for use with React Native 
+
+- `FirebaseAuthProvider` Generic superclass for authentication providers
+- `FirebaseFacebookAuthProvider`  Allows for one method login to Facebook
+- `FirebaseGoogleAuthProvider`  Allows for one method login to Google
+- `FirebaseTwitterAuthProvider` Allows for one method login to Twitter
+- `FirebasePasswordAuthProvider`  Allows for one method login to Firebases email/password authentication
+- `FirebaseLoginViewController` Flexible headful UI which handles login, logout, and error conditions from all identity providers
+
+Usage from ES2015 (React Native)
+
+```js
+import {
+  FireAuthProvider,
+  FireFacebookAuthProvider,
+  FireGoogleAuthProvider,
+  FireTwitterAuthProvider,
+  FirePasswordAuthProvider,
+
+  // the main UI component
+  FireLoginViewController
+} from 'firebase-ui-auth';
+
+
+
+class AuthDemoApp extends React.Component {
+  render() {
+    return (
+      <FireLoginView ref={fireRef} providers={...providers}/>
+    )
+  }
+}
+
+```
+
+Auth Providers should use a similar API as on the native side. The key is to avoid duplication and make it simple!
+We can assume we have a single const Firebase ref in the app, so no need to have an API for each that requires to recreate
+a new firebase ref each time (if possible). Reuse as makes sense!
+
+Create a React Native client app which displays the LoginView via the `FireLoginViewController` and demonstrates social login using 
+ALL of the supported providers. Note: Highest priority to Google and Facebook.   
+
+### Data bound Views
+
+Top priority is the data bound CollectionView and DataSource. TableView has 2nd priority.
+
+```js
+import {
+  FireTableView,
+  FireCollectionView,
+
+  // we need these for fine grained control
+  FireCollectionViewDataSource,
+  FireTableViewDataSource,
+  FirebaseDataSource
+
+} from 'firebase-ui-views';
+
+
+// somewhere..
+
+var collectionDS = new FireCollectionViewDataSource(firebaseRef, id);
+var tableDS = new FireTableViewDataSource(firebaseRef, id);
+
+class TableViewDemoApp extends React.Component {
+   /// ...
+  
+  render() {
+    return (
+      <FireTableView ref={fireRef} 
+        ...
+      />
+    )
+  }
+}
+
+class CollectionViewDemoApp extends React.Component {
+   /// ...
+   
+  render() {
+    return (
+      <FireCollectionView ref={fireRef} 
+        ...
+      />
+    )
+  }
+}
+```

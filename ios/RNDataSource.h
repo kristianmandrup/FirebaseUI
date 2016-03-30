@@ -15,4 +15,6 @@
 @property (strong, nonatomic, __NON_NULL) NSString *firebaseUrl;
 @property (strong, nonatomic, __NON_NULL) NSString *reuseIdentifier;
 @property (strong, nonatomic, __NON_NULL) Firebase *firebaseRef;
+
+- (void) init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier;
 @end

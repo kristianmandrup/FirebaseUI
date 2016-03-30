@@ -9,6 +9,7 @@
 #import "RNCollectionViewDataSource.h"
 #import <Firebase/Firebase.h>
 #import "AppDelegate.h"
+#import "FirebaseCollectionViewDataSource.h"
 
 @implementation RNCollectionViewDataSource
 RCT_EXPORT_MODULE();
@@ -18,7 +19,7 @@ RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIden
   [super init];
 }
 
-- (FirebaseCollectionViewDataSource) createDataSource
+- (FirebaseCollectionViewDataSource*) createDataSource
 {
   return [[FirebaseCollectionViewDataSource alloc] initWithRef:self.firebaseRef cellReuseIdentifier:self.reuseIdentifier view:self.collectionView];
 }
