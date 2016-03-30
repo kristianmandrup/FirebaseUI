@@ -1,0 +1,15 @@
+PODS:
+  - Firebase (2.4.1.1)
+  - FirebaseUI (0.2.6):
+    - Firebase (~> 2.4.1.1)
+
+DEPENDENCIES:
+  - FirebaseUI (~> 0.2.0)
+
+SPEC CHECKSUMS:
+  Firebase: 47f921f251c8982d147d90f2845816b21f016acc
+  FirebaseUI: 9d251f663c439aa22f79249d7d00a9ec09087fe4
+
+PODFILE CHECKSUM: 22aa9947f4327c35c905bbb9d97ec9d58e4bbb89
+
+COCOAPODS: 1.0.0.beta.6
