@@ -1,20 +1,20 @@
 # Firebase UI for React Native
 
-An experiment, trying to wrap [Firebase UI]() for [React Native]() 
+An experiment, trying to wrap [Firebase UI](https://github.com/firebase/FirebaseUI-iOS) for [React Native](https://facebook.github.io/react-native/) 
 
-[Custom iOS views with React Native](http://almostobsolete.net/react-native/custom-ios-views-with-react-native.html)
-[Using CocoaPods with React Native](https://shift.infinite.red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995#.1xuceegqs)
-Catalogue of some nice [Cocoa controls](https://www.cocoacontrols.com/)
-Ideally we also want to enable [Touch ID auth](https://auth0.com/blog/2015/04/03/using-touchid-for-authentication-in-your-react-native-app/)
-Perhaps we can use [Form generator](https://www.npmjs.com/package/react-native-form-generator) for Registration etc?
+### Various resourcess
 
-React Native [new-library](https://github.com/facebook/react-native/pull/405) generator, source [here](https://github.com/facebook/react-native/pull/405/commits/396439bf86df51067ea3bb539e1fee41214cf10b)
+- [Custom iOS views with React Native](http://almostobsolete.net/react-native/custom-ios-views-with-react-native.html)
+- [Using CocoaPods with React Native](https://shift.infinite.red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995#.1xuceegqs)
+- Catalogue of some nice [Cocoa controls](https://www.cocoacontrols.com/)
+- Ideally we also want to enable [Touch ID auth](https://auth0.com/blog/2015/04/03/using-touchid-for-authentication-in-your-react-native-app/)
+- Perhaps we can use [Form generator](https://www.npmjs.com/package/react-native-form-generator) for Registration etc?
+- React Native [new-library](https://github.com/facebook/react-native/pull/405) generator, source [here](https://github.com/facebook/react-native/pull/405/commits/396439bf86df51067ea3bb539e1fee41214cf10b)
 
 `react-native new-library --name Auth`
 
-There is also [React Native Cordova plugins](http://blog.nparashuram.com/2015/10/using-cordova-plugins-in-react-native.html) as inspiration...
-
-Also see: [Bridging in React Native](http://tadeuzagallo.com/blog/react-native-bridge/)
+- There is also [React Native Cordova plugins](http://blog.nparashuram.com/2015/10/using-cordova-plugins-in-react-native.html) as inspiration...
+- Also see: [Bridging in React Native](http://tadeuzagallo.com/blog/react-native-bridge/)
 
 ### Adding pods
 
