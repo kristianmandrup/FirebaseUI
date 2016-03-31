@@ -12,6 +12,12 @@
 @implementation RNDataSource
 RCT_EXPORT_MODULE();
 
+// synthesize getters and setters which also allows for . access syntax :) 
+@synthesize firebaseUrl=_firebaseUrl;
+@synthesize firebaseRef=firebaseRef;
+@synthesize reuseIdentifier=_reuseIdentifier;
+@synthesize dataSource=_dataSource;
+
 RCT_EXPORT_METHOD(init:(NSString *)appName reuseIdentifier:(NSString *)reuseIdentifier)
 {
   self.firebaseUrl = [NSString stringWithFormat:@"https://%@.firebaseio.com/", appName];
