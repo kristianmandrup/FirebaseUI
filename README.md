@@ -1,5 +1,7 @@
 # Firebase UI for React Native
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kristianmandrup/FirebaseUI.svg)](https://greenkeeper.io/)
+
 An experiment, trying to wrap [Firebase UI](https://github.com/firebase/FirebaseUI-iOS) for [React Native](https://facebook.github.io/react-native/) 
 
 ### Various resourcess
